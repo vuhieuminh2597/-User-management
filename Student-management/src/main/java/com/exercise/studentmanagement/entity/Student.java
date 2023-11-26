@@ -14,7 +14,7 @@ public class Student {
     @Column(name = "student_name")
     private String name;
     @Column(name = "student_birth_day")
-    private Date dayOfBirth;
+    private String dayOfBirth;
     @Column(name = "student_address")
     private String address;
     @Column(name = "student_email")
@@ -25,7 +25,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(String name, Date dayOfBirth, String address, String email, String phoneNumber) {
+    public Student(String name, String dayOfBirth, String address, String email, String phoneNumber) {
         this.name = name;
         this.dayOfBirth = dayOfBirth;
         this.address = address;
@@ -49,11 +49,11 @@ public class Student {
         this.name = name;
     }
 
-    public Date getDayOfBirth() {
+    public String getDayOfBirth() {
         return dayOfBirth;
     }
 
-    public void setDayOfBirth(Date dayOfBirth) {
+    public void setDayOfBirth(String dayOfBirth) {
         this.dayOfBirth = dayOfBirth;
     }
 
