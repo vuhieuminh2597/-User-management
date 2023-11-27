@@ -2,7 +2,7 @@ package com.exercise.studentmanagement.controller;
 
 import com.exercise.studentmanagement.entity.Student;
 import com.exercise.studentmanagement.model.ResponseObject;
-import com.exercise.studentmanagement.service.StudentService;
+import com.exercise.studentmanagement.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,16 +14,16 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path = "api/v1/Student")
 public class StudentController {
-    private StudentService studentService;
+    private StudentServiceImpl studentService;
 
     @Autowired
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentServiceImpl studentService) {
         this.studentService = studentService;
     }
 
     @GetMapping("")
     public List<Student> getAllStudent() {
-        return studentService.getAllstudentService();
+        return studentService.findAll();
     }
 
     /**
@@ -38,7 +38,7 @@ public class StudentController {
     @GetMapping("/{id}")
     public ResponseEntity<ResponseObject> findStudentById(@PathVariable Long id) {
         //Dùng kiểu Optional để kiểm soát ngoại lệ là null nếu không tìm thấy
-        Optional<Student> foundStudent = studentService.findByIdService(id);
+        Optional<Student> foundStudent = studentService.findById(id);
         if (foundStudent.isPresent()) {
             return ResponseEntity.status(HttpStatus.OK).body(
                     new ResponseObject("Ok", "Query student successfully", foundStudent)
@@ -52,7 +52,7 @@ public class StudentController {
 
     /**
      * @param newStudent
-     * @return
+     * @return an object with : status ,message, data
      */
     @PostMapping("/insert")
     public ResponseEntity<ResponseObject> insertStudent(@RequestBody Student newStudent) {

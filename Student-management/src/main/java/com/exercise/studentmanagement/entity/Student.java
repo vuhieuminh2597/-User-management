@@ -1,11 +1,10 @@
 package com.exercise.studentmanagement.entity;
 
 import jakarta.persistence.*;
-
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
+@Table(name = "student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +20,7 @@ public class Student {
     private String email;
     @Column(name = "student_phone")
     private String phoneNumber;
+
 
     public Student() {
     }
